@@ -1,444 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astrological Calculator</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            opacity: 0.9;
-            font-size: 16px;
-        }
-
-        .calculator {
-            padding: 25px;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .input-field {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border 0.3s;
-        }
-
-        select:focus, input:focus {
-            border-color: #4b6cb7;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.2);
-        }
-
-        .degree-minute-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            flex: 1;
-        }
-
-        #calculate {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            color: white;
-        }
-
-        #calculate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(75, 108, 183, 0.4);
-        }
-
-        #reset {
-            background-color: #f8f9fa;
-            color: #495057;
-            border: 1px solid #ddd;
-        }
-
-        #reset:hover {
-            background-color: #e9ecef;
-        }
-
-        .results {
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .result-card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #4b6cb7;
-        }
-
-        .result-card h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .result-content {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .positive {
-            color: #27ae60;
-        }
-
-        .negative {
-            color: #e74c3c;
-        }
-
-        .degrees-info {
-            margin-top: 30px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .degrees-info h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .degrees-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .degree-item {
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .degree-item h4 {
-            margin-bottom: 10px;
-            color: #4b6cb7;
-        }
-
-        .degree-item p {
-            font-size: 14px;
-        }
-
-        .explanation {
-            margin-top: 30px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .explanation h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        @media (max-width: 600px) {
-            .input-group {
-                flex-direction: column;
-            }
-            .button-group {
-                flex-direction: column;
-            }
-            .results {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astrological Calculator</title>
+<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+        font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        line-height:1.6;color:#333;
+        background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
+        padding:20px;min-height:100vh
+    }
+    .container{
+        max-width:950px;margin:auto;background:#fff;border-radius:12px;
+        box-shadow:0 10px 30px rgba(0,0,0,.1);overflow:hidden
+    }
+    header{
+        background:linear-gradient(135deg,#4b6cb7 0%,#182848 100%);
+        color:#fff;padding:25px;text-align:center
+    }
+    header h1{font-size:28px;margin-bottom:8px}
+    .calculator{padding:25px}
+    .input-group{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:20px}
+    .input-field{flex:1;min-width:200px}
+    label{font-weight:600;margin-bottom:8px;display:block;color:#2c3e50}
+    select{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:16px}
+    select:focus{border-color:#4b6cb7;outline:none;box-shadow:0 0 0 2px rgba(75,108,183,0.2)}
+    .degree-minute-group{display:flex;gap:10px}
+    button{
+        padding:12px 20px;border:none;border-radius:6px;font-size:16px;font-weight:600;
+        cursor:pointer;transition:all .3s;flex:1
+    }
+    .button-group{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+    #calculate{background:linear-gradient(135deg,#4b6cb7 0%,#182848 100%);color:#fff}
+    #calculate:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(75,108,183,.4)}
+    #reset,#showAll{background:#f8f9fa;color:#495057;border:1px solid #ddd}
+    #reset:hover,#showAll:hover{background:#e9ecef}
+    .results{margin-top:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .result-card{
+        background:#fff;border-radius:8px;padding:20px;
+        box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #4b6cb7
+    }
+    .positive{color:#27ae60}.negative{color:#e74c3c}
+    .degrees-info,.explanation{
+        margin-top:30px;background:#f8f9fa;border-radius:8px;padding:20px
+    }
+    .degrees-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+    table{width:100%;border-collapse:collapse;margin-top:20px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#4b6cb7;color:white}
+    tr:nth-child(even){background:#f8f9fa}
+    #summaryTable{display:none;margin-top:20px}
+    @media(max-width:600px){.input-group{flex-direction:column}.button-group{flex-direction:column}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Astrological Calculator</h1>
-            <p>Check Vargottama, Uttama Drekkana, and Pushkara Navamsa in one place</p>
-        </header>
+<div class="container">
+<header>
+    <h1>Astrological Calculator</h1>
+    <p>Check Vargottama, Uttama Drekkana, and Pushkara Navamsa</p>
+</header>
 
-        <div class="calculator">
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="planet">Select Planet:</label>
-                    <select id="planet">
-                        <option>Sun</option>
-                        <option>Moon</option>
-                        <option>Mars</option>
-                        <option>Mercury</option>
-                        <option>Jupiter</option>
-                        <option>Venus</option>
-                        <option>Saturn</option>
-                        <option>Rahu</option>
-                        <option>Ketu</option>
-                    </select>
-                </div>
+<div class="calculator">
+    <div class="input-group">
+        <div class="input-field">
+            <label for="planet">Select Planet:</label>
+            <select id="planet">
+                <option>Sun</option><option>Moon</option><option>Mars</option>
+                <option>Mercury</option><option>Jupiter</option><option>Venus</option>
+                <option>Saturn</option><option>Rahu</option><option>Ketu</option>
+                <option>Lagna</option><option>Mandi/Gulika</option>
+            </select>
+        </div>
 
-                <div class="input-field">
-                    <label for="sign">Select Rashi (D-1 Sign):</label>
-                    <select id="sign">
-                        <option>Aries</option><option>Taurus</option><option>Gemini</option>
-                        <option>Cancer</option><option>Leo</option><option>Virgo</option>
-                        <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
-                        <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
-                    </select>
-                </div>
+        <div class="input-field">
+            <label for="sign">Select Rashi (D-1 Sign):</label>
+            <select id="sign">
+                <option>Aries</option><option>Taurus</option><option>Gemini</option>
+                <option>Cancer</option><option>Leo</option><option>Virgo</option>
+                <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
+                <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
+            </select>
+        </div>
 
-                <div class="input-field">
-                    <label>Enter Degree:</label>
-                    <div class="degree-minute-group">
-                        <select id="degreeSelect"></select>
-                        <select id="minuteSelect"></select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="button-group">
-                <button id="calculate">Calculate Divisional Strengths</button>
-                <button id="reset">Reset</button>
-            </div>
-
-            <div class="results">
-                <div class="result-card">
-                    <h3>🔮 Vargottama</h3>
-                    <div id="vargottama-result" class="result-content">Enter details to check</div>
-                </div>
-
-                <div class="result-card">
-                    <h3>📐 Uttama Drekkana</h3>
-                    <div id="drekkana-result" class="result-content">Enter details to check</div>
-                </div>
-
-                <div class="result-card">
-                    <h3>🌊 Pushkara Navamsa</h3>
-                    <div id="pushkara-result" class="result-content">Enter details to check</div>
-                </div>
-            </div>
-
-            <div class="degrees-info">
-                <h3>Qualifying Degrees for This Sign</h3>
-                <div class="degrees-list">
-                    <div class="degree-item">
-                        <h4>Vargottama Degrees</h4>
-                        <div id="vargottama-degrees">Enter sign to see degrees</div>
-                    </div>
-
-                    <div class="degree-item">
-                        <h4>Uttama Drekkana Degrees</h4>
-                        <div id="drekkana-degrees">Enter sign to see degrees</div>
-                    </div>
-
-                    <div class="degree-item">
-                        <h4>Pushkara Navamsa Degrees</h4>
-                        <div id="pushkara-degrees">Enter sign to see degrees</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="explanation">
-                <h3>About These Divisional Strengths</h3>
-                <p><strong>Vargottama:</strong> When a planet occupies the same sign in both D-1 and D-9, it becomes very strong.</p>
-                <p><strong>Uttama Drekkana:</strong> A planet in its best Drekkana gains enhanced power.</p>
-                <p><strong>Pushkara Navamsa:</strong> Auspicious Navamsas that amplify benefic effects.</p>
+        <div class="input-field">
+            <label>Enter Degree:</label>
+            <div class="degree-minute-group">
+                <select id="degreeSelect"></select>
+                <select id="minuteSelect"></select>
             </div>
         </div>
     </div>
 
-    <script>
-        const signTypes = {
-            Aries: "Movable", Cancer: "Movable", Libra: "Movable", Capricorn: "Movable",
-            Taurus: "Fixed", Leo: "Fixed", Scorpio: "Fixed", Aquarius: "Fixed",
-            Gemini: "Dual", Virgo: "Dual", Sagittarius: "Dual", Pisces: "Dual"
-        };
+    <div class="button-group">
+        <button id="calculate">Calculate</button>
+        <button id="reset">Reset</button>
+        <button id="showAll">Show All Degrees Table</button>
+    </div>
 
-        const pushkaraNavamsas = {
-            Aries: [7, 9], Taurus: [3, 5], Gemini: [6, 9], Cancer: [1, 3],
-            Leo: [2, 5], Virgo: [4, 7], Libra: [5, 7], Scorpio: [6, 8],
-            Sagittarius: [1, 4], Capricorn: [2, 6], Aquarius: [3, 9], Pisces: [4, 8]
-        };
+    <div class="results">
+        <div class="result-card">
+            <h3>🔮 Vargottama</h3>
+            <div id="vargottama-result">Enter details to check</div>
+        </div>
+        <div class="result-card">
+            <h3>📐 Uttama Drekkana</h3>
+            <div id="drekkana-result">Enter details to check</div>
+        </div>
+        <div class="result-card">
+            <h3>🌊 Pushkara Navamsa</h3>
+            <div id="pushkara-result">Enter details to check</div>
+        </div>
+    </div>
 
-        const NAVAMSA_SIZE = 3 + 20 / 60; // 3°20′
+    <div class="degrees-info">
+        <h3>Qualifying Degrees for This Sign</h3>
+        <div class="degrees-list">
+            <div><strong>Vargottama Degrees:</strong> <span id="vargottama-degrees">Enter sign</span></div>
+            <div><strong>Uttama Drekkana:</strong> <span id="drekkana-degrees">Enter sign</span></div>
+            <div><strong>Pushkara Navamsa:</strong> <span id="pushkara-degrees">Enter sign</span></div>
+        </div>
+    </div>
 
-        function isVargottama(sign, degree) {
-            const type = signTypes[sign];
-            if (type === "Movable") return degree >= 0 && degree < NAVAMSA_SIZE;
-            if (type === "Fixed") return degree >= 13 + 20/60 && degree < 16 + 40/60;
-            if (type === "Dual") return degree >= 26 + 40/60 && degree <= 30;
-            return false;
-        }
+    <div id="summaryTable">
+        <h3>All Signs - Divisional Strength Ranges</h3>
+        <table>
+            <thead>
+                <tr><th>Sign</th><th>Vargottama</th><th>Uttama Drekkana</th><th>Pushkara Navamsa Degrees</th></tr>
+            </thead>
+            <tbody id="summaryBody"></tbody>
+        </table>
+    </div>
 
-        function calculateResults() {
-            const planet = document.getElementById("planet").value;
-            const sign = document.getElementById("sign").value;
-            const deg = parseInt(document.getElementById("degreeSelect").value);
-            const min = parseInt(document.getElementById("minuteSelect").value);
-            const degree = deg + min / 60;
+    <div class="explanation">
+        <h3>About These Divisional Strengths</h3>
+        <p><strong>Vargottama:</strong> Same sign in D1 and D9 → very auspicious.</p>
+        <p><strong>Uttama Drekkana:</strong> Planet in best Drekkana section of sign.</p>
+        <p><strong>Pushkara Navamsa:</strong> Auspicious Navamsas (3°20′ per Navamsa).</p>
+    </div>
+</div>
+</div>
 
-            if (isNaN(degree) || degree < 0 || degree > 30) {
-                alert("Please select valid degree and minute values (0°00′–30°00′)");
-                return;
-            }
+<script>
+const signTypes={
+    Aries:"Movable",Cancer:"Movable",Libra:"Movable",Capricorn:"Movable",
+    Taurus:"Fixed",Leo:"Fixed",Scorpio:"Fixed",Aquarius:"Fixed",
+    Gemini:"Dual",Virgo:"Dual",Sagittarius:"Dual",Pisces:"Dual"
+};
+const pushkaraNavamsas={
+    Aries:[7,9],Taurus:[3,5],Gemini:[6,9],Cancer:[1,3],
+    Leo:[2,5],Virgo:[4,7],Libra:[5,7],Scorpio:[6,8],
+    Sagittarius:[1,4],Capricorn:[2,6],Aquarius:[3,9],Pisces:[4,8]
+};
+const NAVAMSA_SIZE=3+20/60;
 
-            const isVargottamaResult = isVargottama(sign, degree);
+function isVargottama(sign,degree){
+    const t=signTypes[sign];
+    if(t==="Movable")return degree>=0&&degree<NAVAMSA_SIZE;
+    if(t==="Fixed")return degree>=13+20/60&&degree<16+40/60;
+    if(t==="Dual")return degree>=26+40/60&&degree<=30;
+    return false;
+}
 
-            const type = signTypes[sign];
-            let drekkana = degree < 10 ? "1st" : degree < 20 ? "2nd" : "3rd";
-            let isUttama = (type === "Movable" && degree < 10) ||
-                           (type === "Fixed" && degree >= 10 && degree < 20) ||
-                           (type === "Dual" && degree >= 20);
+function calculateResults(){
+    const planet=document.getElementById("planet").value;
+    const sign=document.getElementById("sign").value;
+    const deg=parseInt(document.getElementById("degreeSelect").value);
+    const min=parseInt(document.getElementById("minuteSelect").value);
+    const degree=deg+min/60;
+    if(isNaN(degree)||degree<0||degree>30){alert("Invalid degree.");return;}
 
-            const navamsa = Math.floor(degree / NAVAMSA_SIZE) + 1;
-            const pushkaraList = pushkaraNavamsas[sign];
-            const isPushkara = pushkaraList.includes(navamsa);
+    const varg=isVargottama(sign,degree);
+    const t=signTypes[sign];
+    const drekkana=degree<10?"1st":degree<20?"2nd":"3rd";
+    const uttama=(t==="Movable"&&degree<10)||(t==="Fixed"&&degree>=10&&degree<20)||(t==="Dual"&&degree>=20);
+    const nav=Math.floor(degree/NAVAMSA_SIZE)+1;
+    const pushList=pushkaraNavamsas[sign];
+    const isPush=pushList.includes(nav);
 
-            document.getElementById("vargottama-result").innerHTML =
-                isVargottamaResult
-                    ? `<span class='positive'>✅ Vargottama! ${planet} remains in ${sign} in D-9.</span>`
-                    : `<span class='negative'>❌ Not Vargottama.</span>`;
+    document.getElementById("vargottama-result").innerHTML=varg?`<span class='positive'>✅ Vargottama!</span>`:`<span class='negative'>❌ Not Vargottama.</span>`;
+    document.getElementById("drekkana-result").innerHTML=uttama?`<span class='positive'>✅ Uttama Drekkana (${drekkana})</span>`:`<span class='negative'>❌ Not Uttama (${drekkana})</span>`;
+    document.getElementById("pushkara-result").innerHTML=isPush?`<span class='positive'>✅ Pushkara Navamsa (${nav}th)</span>`:`<span class='negative'>❌ Not Pushkara (${nav}th)</span>`;
 
-            document.getElementById("drekkana-result").innerHTML =
-                isUttama
-                    ? `<span class='positive'>✅ Uttama Drekkana! (${drekkana} Drekkana)</span>`
-                    : `<span class='negative'>❌ Not Uttama Drekkana. (${drekkana} Drekkana)</span>`;
+    displayQualifyingDegrees(sign);
+}
 
-            document.getElementById("pushkara-result").innerHTML =
-                isPushkara
-                    ? `<span class='positive'>✅ Pushkara Navamsa! ${navamsa}th Navamsa.</span>`
-                    : `<span class='negative'>❌ Not Pushkara Navamsa. (${navamsa}th Navamsa)</span>`;
+function displayQualifyingDegrees(sign){
+    const t=signTypes[sign];
+    const vargRange=t==="Movable"?"0°00′–3°20′":t==="Fixed"?"13°20′–16°40′":"26°40′–30°00′";
+    const uttRange=t==="Movable"?"0°–10°":t==="Fixed"?"10°–20°":"20°–30°";
+    document.getElementById("vargottama-degrees").innerText=vargRange;
+    document.getElementById("drekkana-degrees").innerText=uttRange;
 
-            displayQualifyingDegrees(sign);
-        }
+    const pList=pushkaraNavamsas[sign].map(n=>{
+        const start=(n-1)*NAVAMSA_SIZE,end=n*NAVAMSA_SIZE;
+        const sd=Math.floor(start),sm=Math.round((start-sd)*60);
+        const ed=Math.floor(end),em=Math.round((end-ed)*60);
+        return `${sd}°${sm.toString().padStart(2,"0")}′–${ed}°${em.toString().padStart(2,"0")}′`;
+    });
+    document.getElementById("pushkara-degrees").innerText=pList.join(", ");
+}
 
-        function displayQualifyingDegrees(sign) {
-            const type = signTypes[sign];
-            let vargottamaRange =
-                type === "Movable" ? "0°00′–3°20′" :
-                type === "Fixed" ? "13°20′–16°40′" :
-                "26°40′–30°00′";
-            document.getElementById("vargottama-degrees").innerHTML = vargottamaRange;
+function resetForm(){
+    document.getElementById("planet").value="Sun";
+    document.getElementById("sign").value="Aries";
+    document.getElementById("degreeSelect").value="0";
+    document.getElementById("minuteSelect").value="0";
+    document.querySelectorAll(".result-card div").forEach(el=>el.textContent="Enter details to check");
+    document.getElementById("vargottama-degrees").textContent="Enter sign";
+    document.getElementById("drekkana-degrees").textContent="Enter sign";
+    document.getElementById("pushkara-degrees").textContent="Enter sign";
+    document.getElementById("summaryTable").style.display="none";
+}
 
-            let uttamaRange =
-                type === "Movable" ? "0°–10°" :
-                type === "Fixed" ? "10°–20°" : "20°–30°";
-            document.getElementById("drekkana-degrees").innerHTML = uttamaRange;
+function populateDropdowns(){
+    const d=document.getElementById("degreeSelect"),m=document.getElementById("minuteSelect");
+    for(let i=0;i<=29;i++){let o=document.createElement("option");o.value=i;o.textContent=`${i}°`;d.appendChild(o);}
+    for(let i=0;i<60;i++){let o=document.createElement("option");o.value=i;o.textContent=`${i}′`;m.appendChild(o);}
+}
 
-            const pushList = pushkaraNavamsas[sign].map(n => {
-                const start = (n - 1) * NAVAMSA_SIZE;
-                const end = n * NAVAMSA_SIZE;
-                const sDeg = Math.floor(start);
-                const sMin = Math.round((start - sDeg) * 60);
-                const eDeg = Math.floor(end);
-                const eMin = Math.round((end - eDeg) * 60);
-                return `${sDeg}°${sMin.toString().padStart(2, "0")}′–${eDeg}°${eMin.toString().padStart(2, "0")}′`;
-            });
-            document.getElementById("pushkara-degrees").innerHTML = pushList.join(", ");
-        }
+function showAll(){
+    const body=document.getElementById("summaryBody");
+    body.innerHTML="";
+    for(let sign in signTypes){
+        const t=signTypes[sign];
+        const varg=t==="Movable"?"0°00′–3°20′":t==="Fixed"?"13°20′–16°40′":"26°40′–30°00′";
+        const utt=t==="Movable"?"0°–10°":t==="Fixed"?"10°–20°":"20°–30°";
+        const pList=pushkaraNavamsas[sign].map(n=>{
+            const s=(n-1)*NAVAMSA_SIZE,e=n*NAVAMSA_SIZE;
+            const sd=Math.floor(s),sm=Math.round((s-sd)*60);
+            const ed=Math.floor(e),em=Math.round((e-ed)*60);
+            return `${sd}°${sm.toString().padStart(2,"0")}′–${ed}°${em.toString().padStart(2,"0")}′`;
+        }).join(", ");
+        const row=`<tr><td>${sign}</td><td>${varg}</td><td>${utt}</td><td>${pList}</td></tr>`;
+        body.insertAdjacentHTML("beforeend",row);
+    }
+    document.getElementById("summaryTable").style.display="block";
+}
 
-        function resetForm() {
-            document.getElementById("planet").value = "Sun";
-            document.getElementById("sign").value = "Aries";
-            document.getElementById("degreeSelect").value = "0";
-            document.getElementById("minuteSelect").value = "0";
-            document.querySelectorAll(".result-content").forEach(el => el.textContent = "Enter details to check");
-            document.getElementById("vargottama-degrees").textContent = "Enter sign to see degrees";
-            document.getElementById("drekkana-degrees").textContent = "Enter sign to see degrees";
-            document.getElementById("pushkara-degrees").textContent = "Enter sign to see degrees";
-        }
-
-        function populateDropdowns() {
-            const degSel = document.getElementById("degreeSelect");
-            const minSel = document.getElementById("minuteSelect");
-            for (let i = 0; i <= 29; i++) {
-                const opt = document.createElement("option");
-                opt.value = i;
-                opt.textContent = `${i}°`;
-                degSel.appendChild(opt);
-            }
-            for (let i = 0; i < 60; i++) {
-                const opt = document.createElement("option");
-                opt.value = i;
-                opt.textContent = `${i}′`;
-                minSel.appendChild(opt);
-            }
-        }
-
-        document.getElementById("calculate").addEventListener("click", calculateResults);
-        document.getElementById("reset").addEventListener("click", resetForm);
-        document.getElementById("sign").addEventListener("change", e => displayQualifyingDegrees(e.target.value));
-        populateDropdowns();
-        displayQualifyingDegrees("Aries");
-    </script>
+document.getElementById("calculate").addEventListener("click",calculateResults);
+document.getElementById("reset").addEventListener("click",resetForm);
+document.getElementById("sign").addEventListener("change",e=>displayQualifyingDegrees(e.target.value));
+document.getElementById("showAll").addEventListener("click",showAll);
+populateDropdowns();
+displayQualifyingDegrees("Aries");
+</script>
 </body>
 </html>
-
