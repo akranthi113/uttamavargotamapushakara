@@ -47,12 +47,100 @@
         margin-top:30px;background:#f8f9fa;border-radius:8px;padding:20px
     }
     .degrees-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
-    table{width:100%;border-collapse:collapse;margin-top:20px}
-    th,td{border:1px solid #ccc;padding:8px;text-align:center}
-    th{background:#4b6cb7;color:white}
-    tr:nth-child(even){background:#f8f9fa}
-    #summaryTable{display:none;margin-top:20px}
-    @media(max-width:600px){.input-group{flex-direction:column}.button-group{flex-direction:column}}
+    
+    /* Table styles - made responsive */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px; /* Ensures table doesn't get too small on mobile */
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+        white-space: nowrap; /* Prevent text wrapping in table cells */
+    }
+    th {
+        background: #4b6cb7;
+        color: white;
+        position: sticky;
+        left: 0;
+    }
+    tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+    #summaryTable {
+        display: none;
+        margin-top: 20px;
+    }
+    
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+        .container {
+            border-radius: 8px;
+        }
+        header {
+            padding: 20px 15px;
+        }
+        header h1 {
+            font-size: 24px;
+        }
+        .calculator {
+            padding: 15px;
+        }
+        .input-group {
+            gap: 15px;
+        }
+        .input-field {
+            min-width: 100%;
+        }
+        .results {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .result-card {
+            padding: 15px;
+        }
+        .degrees-list {
+            grid-template-columns: 1fr;
+        }
+        .button-group {
+            flex-direction: column;
+        }
+        button {
+            width: 100%;
+        }
+        .explanation, .degrees-info {
+            padding: 15px;
+        }
+        th, td {
+            padding: 8px 6px;
+            font-size: 14px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+        header h1 {
+            font-size: 22px;
+        }
+        .calculator {
+            padding: 10px;
+        }
+        th, td {
+            padding: 6px 4px;
+            font-size: 13px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -125,12 +213,14 @@
 
     <div id="summaryTable">
         <h3>All Signs - Divisional Strength Ranges</h3>
-        <table>
-            <thead>
-                <tr><th>Sign</th><th>Vargottama</th><th>Uttama Drekkana</th><th>Pushkara Navamsa Degrees</th></tr>
-            </thead>
-            <tbody id="summaryBody"></tbody>
-        </table>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Sign</th><th>Vargottama</th><th>Uttama Drekkana</th><th>Pushkara Navamsa Degrees</th></tr>
+                </thead>
+                <tbody id="summaryBody"></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="explanation">
